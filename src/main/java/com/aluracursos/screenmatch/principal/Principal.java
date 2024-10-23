@@ -27,14 +27,14 @@ public class Principal {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """
-                    1 - Buscar series 
+                    \n1 - Buscar series en OMDB
                     2 - Buscar episodios
                     3 - Mostrar series buscadas
-                    4 - Buscar series por titulo
+                    4 - Buscar series por título
                     5 - Top 5 mejores series
                     6 - Buscar Series por categoría
                     7 - filtrar series por temporadas y evaluación
-                    8 - Buscar episodios por titulo
+                    8 - Buscar episodios por título
                     9 - Top 5 episodios por Serie
                                   
                     0 - Salir
@@ -91,7 +91,7 @@ public class Principal {
     }
     private void buscarEpisodioPorSerie() {
         mostrarSeriesBuscadas();
-        System.out.println("Escribe el nombre de la serie de la cual quieres ver los episodios");
+        System.out.println("Escribe el nombre de la serie de la cual quieres ver los episodios: ");
         var nombreSerie = teclado.nextLine();
 
         Optional<Serie> serie = series.stream()
@@ -164,16 +164,16 @@ public class Principal {
         seriesPorCategoria.forEach(System.out::println);
     }
     public void filtrarSeriesPorTemporadaYEvaluacion(){
-        System.out.println("¿Filtrar séries con cuántas temporadas? ");
+        System.out.println("¿Filtrar series con cuántas temporadas?");
         var totalTemporadas = teclado.nextInt();
         teclado.nextLine();
-        System.out.println("¿Com evaluación apartir de cuál valor? ");
+        System.out.println("¿Con evaluación a partir de cuál valor?");
         var evaluacion = teclado.nextDouble();
         teclado.nextLine();
         List<Serie> filtroSeries = repositorio.seriesPorTemparadaYEvaluacion(totalTemporadas,evaluacion);
-        System.out.println("*** Series filtradas ***");
+        System.out.println("*** Series filtradas: ***");
         filtroSeries.forEach(s ->
-                System.out.println(s.getTitulo() + "  - evaluacion: " + s.getEvaluacion()));
+                System.out.println(s.getTitulo() + "  - evaluación: " + s.getEvaluacion()));
     }
 
     private void  buscarEpisodiosPorTitulo(){

@@ -37,14 +37,15 @@ public class Serie {
 
     @Override
     public String toString() {
-        return  "genero=" + genero +
-                "titulo='" + titulo + '\'' +
-                ", totalTemporadas=" + totalTemporadas +
-                ", evaluacion=" + evaluacion +
-                ", poster='" + poster + '\'' +
-                ", actores='" + actores + '\'' +
-                ", sinopsis='" + sinopsis + '\'' +
-                ", episodios='" + episodios + '\'';
+        return "\nTítulo: " + titulo +
+                "\nTotal de Temporadas: " + totalTemporadas +
+                "\nEvaluación: " + evaluacion +
+                "\nPóster: " + poster +
+                "\nGénero: " + genero +
+                "\nActores: " + actores +
+                "\nSinopsis: " + sinopsis +
+                "\nEpisodios: " + episodios;
+
     }
 
     public List<Episodio> getEpisodios() {
