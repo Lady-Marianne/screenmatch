@@ -27,15 +27,15 @@ public class Principal {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """
-                    \n1 - Buscar series en OMDB
-                    2 - Buscar episodios
-                    3 - Mostrar series buscadas
-                    4 - Buscar series por título
-                    5 - Top 5 mejores series
-                    6 - Buscar Series por categoría
-                    7 - filtrar series por temporadas y evaluación
-                    8 - Buscar episodios por título
-                    9 - Top 5 episodios por Serie
+                    \n1 - Buscar series en OMDB.
+                    2 - Buscar episodios en OMDB de las series que ya tengo.
+                    3 - Mostrar series buscadas.
+                    4 - Buscar series por título de mi base de datos.
+                    5 - Top 5 mejores series.
+                    6 - Buscar Series por categoría.
+                    7 - filtrar series por temporadas y evaluación.
+                    8 - Buscar episodios por título.
+                    9 - Top 5 episodios por Serie.
                                   
                     0 - Salir
                     """;
@@ -82,7 +82,7 @@ public class Principal {
     }
 
     private DatosSerie getDatosSerie() {
-        System.out.println("Escribe el nombre de la serie que deseas buscar");
+        System.out.println("Escribe el nombre de la serie que deseas buscar en OMDB: ");
         var nombreSerie = teclado.nextLine();
         var json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+") + API_KEY);
         System.out.println(json);
@@ -117,9 +117,6 @@ public class Principal {
             serieEncontrada.setEpisodios(episodios);
             repositorio.save(serieEncontrada);
         }
-
-
-
     }
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
@@ -138,7 +135,7 @@ public class Principal {
     }
 
     private void buscarSeriesPorTitulo(){
-        System.out.println("Escribe el nombre de la serie que deseas buscar");
+        System.out.println("Escribe el nombre de la serie que deseas buscar en tu base de datos: ");
         var nombreSerie = teclado.nextLine();
         serieBuscada = repositorio.findByTituloContainsIgnoreCase(nombreSerie);
 
@@ -152,11 +149,11 @@ public class Principal {
     private void buscarTop5Series(){
         List<Serie> topSeries = repositorio.findTop5ByOrderByEvaluacionDesc();
         topSeries.forEach(s ->
-                System.out.println("Serie: " + s.getTitulo() + " Evaluacion: " + s.getEvaluacion()) );
+                System.out.println("Serie: " + s.getTitulo() + " Evaluación: " + s.getEvaluacion()) );
     }
 
     private void buscarSeriesPorCategoria(){
-        System.out.println("Escriba el genero/categoría de la serie que desea buscar");
+        System.out.println("Escriba el genero/categoría de la serie que desea buscar:");
         var genero = teclado.nextLine();
         var categoria = Categoria.fromEspanol(genero);
         List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
@@ -177,7 +174,7 @@ public class Principal {
     }
 
     private void  buscarEpisodiosPorTitulo(){
-        System.out.println("Escribe el nombre del episodio que deseas buscar");
+        System.out.println("Escribe el nombre del episodio que deseas buscar:");
         var nombreEpisodio = teclado.nextLine();
         List<Episodio> episodiosEncontrados = repositorio.episodiosPorNombre(nombreEpisodio);
         episodiosEncontrados.forEach(e ->
