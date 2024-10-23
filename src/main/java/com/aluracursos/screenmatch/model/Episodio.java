@@ -4,23 +4,20 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 @Entity
 @Table(name = "episodios")
-
 public class Episodio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
     private Integer temporada;
     private String titulo;
     private Integer numeroEpisodio;
     private Double evaluacion;
     private LocalDate fechaDeLanzamiento;
-
     @ManyToOne
     private Serie serie;
+
     public Episodio(){}
 
     public Episodio(Integer numero, DatosEpisodio d) {
@@ -29,7 +26,7 @@ public class Episodio {
         this.numeroEpisodio = d.numeroEpisodio();
         try{
             this.evaluacion = Double.valueOf(d.evaluacion());
-        } catch (IllegalArgumentException e) {
+        }catch (NumberFormatException e){
             this.evaluacion = 0.0;
         }
         try{
@@ -91,10 +88,10 @@ public class Episodio {
     @Override
     public String toString() {
         return
-                "Temporada: " + temporada +
-                "\nTítulo: " + titulo +
-                "\nNúmero de episodio: " + numeroEpisodio +
-                "\nEvaluación: " + evaluacion +
-                "\nFecha de lanzamiento. " + fechaDeLanzamiento;
+                "temporada=" + temporada +
+                ", titulo='" + titulo + '\'' +
+                ", numeroEpisodio=" + numeroEpisodio +
+                ", evaluacion=" + evaluacion +
+                ", fechaDeLanzamiento=" + fechaDeLanzamiento;
     }
 }
