@@ -118,17 +118,24 @@ public class Principal {
             repositorio.save(serieEncontrada);
         }
     }
+
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
-        Serie serie = new Serie(datos);
-        repositorio.save(serie);
-        //datosSeries.add(datos);
-        System.out.println(datos);
+        // Verificamos si la serie ya existe en nuestra base de datos:
+        Optional<Serie> serieExistente = repositorio.findByTituloContainsIgnoreCase(datos.titulo());
+        if (serieExistente.isPresent()) {
+            System.out.println("La serie '" + datos.titulo() + "' ya existe en la base de datos." +
+                    " Debe buscarla con la opción 4 del menú.");
+        } else {
+            Serie serie = new Serie(datos);
+            repositorio.save(serie);
+            System.out.println("Serie agregada correctamente: " + datos);
+        }
     }
+
 
     private void mostrarSeriesBuscadas() {
         series = repositorio.findAll();
-
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
